@@ -17,6 +17,8 @@ namespace Sol.Galaxy.Data.Contexts.Configurations
             builder.ToTable("Inovoice", "DBO");
             builder.HasKey(x => x.Id);
             builder.Property(t => t.Amount).HasColumnType("decimal(12,2)");
+            builder.HasOne<Customer>(t=>t.Customer).WithMany(x=>x.Invoices).HasForeignKey(x=>x.CustomerId);
+
         }
     }
 }

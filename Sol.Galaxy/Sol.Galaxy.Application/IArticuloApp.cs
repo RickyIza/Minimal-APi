@@ -10,7 +10,7 @@ namespace Sol.Galaxy.Application
 
         Task<Articulo> SaveArticulo(Articulo articulo);
 
-        Task< Articulo> DeleteArticulo(int id); 
+
 
 
     }

@@ -49,7 +49,7 @@ namespace Sol.Galaxy.Data.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(12,2)");
 
-                    b.Property<int?>("CustomerId")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("InvoiceDate")
@@ -105,10 +105,17 @@ namespace Sol.Galaxy.Data.Migrations
             modelBuilder.Entity("Sol.Galaxy.Data.Entities.Invoice", b =>
                 {
                     b.HasOne("Sol.Galaxy.Data.Entities.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId");
+                        .WithMany("Invoices")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Sol.Galaxy.Data.Entities.Customer", b =>
+                {
+                    b.Navigation("Invoices");
                 });
 #pragma warning restore 612, 618
         }

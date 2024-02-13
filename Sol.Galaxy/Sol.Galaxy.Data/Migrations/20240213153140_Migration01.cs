@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Sol.Galaxy.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Migration02 : Migration
+    public partial class Migration01 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -67,7 +67,7 @@ namespace Sol.Galaxy.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InvoiceDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: true)
+                    CustomerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -77,7 +77,8 @@ namespace Sol.Galaxy.Data.Migrations
                         column: x => x.CustomerId,
                         principalSchema: "DBO",
                         principalTable: "Customer",
-                        principalColumn: "CustomerId");
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

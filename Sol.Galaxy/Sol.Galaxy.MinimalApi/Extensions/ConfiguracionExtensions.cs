@@ -56,19 +56,7 @@ namespace Sol.Galaxy.MinimalApi.Extensions
             
             });
 
-            app.MapDelete("/articulos/{id}", async (IArticuloApp articuloApp, int id = 0) =>
-            {
-                Articulo a = await articuloApp.DeleteArticulo(id);
-                if (a == null)
-                {
-                    return Results.BadRequest("No se encontro el articulo ");
 
-                }
-                else
-                    return Results.Ok("Articulo Eliminado");
-
-            }).WithOpenApi();
-            //metods
 
 
             return app;

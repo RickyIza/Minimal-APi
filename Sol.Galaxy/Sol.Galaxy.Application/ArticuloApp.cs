@@ -22,24 +22,10 @@ namespace Sol.Galaxy.Application
             this.mapper = mapper;
         }
 
-        public async Task<Articulo> DeleteArticulo(int id)
-        {
-            Product res = await articuloData.DeleteProduct(id);
-            Articulo articulo = null;
-
-            if (res != null)
-            {
-                articulo = mapper.Map<Articulo>(res);
-            }
-
-            return articulo;
-
-
-        }
 
         public async Task<Articulo> GetArticulo(int id)
         {
-            Product res= await articuloData.GetProduct(id);
+            Product res= await articuloData.GetByIdAsync(id);
             Articulo articulo = null;
 
             if(res != null){
@@ -54,7 +40,7 @@ namespace Sol.Galaxy.Application
         public async Task<List<Articulo>> GetArticulos()
         {
 
-            List<Product> res = await articuloData.GetProducts();
+            List<Product> res = await articuloData.ListAllAsync();
 
             List<Articulo>articulos=mapper.Map<List<Articulo>>(res);
          
@@ -71,7 +57,7 @@ namespace Sol.Galaxy.Application
         public async Task<Articulo> SaveArticulo(Articulo articulo)
         {
            Product p = new Product { ProductId=articulo.Codigo,ProductName=articulo.Nombre};
-            await articuloData.InsertProduct(p);
+            await articuloData.AddAsync(p);
 
             return articulo;
         }

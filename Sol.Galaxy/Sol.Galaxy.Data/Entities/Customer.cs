@@ -10,5 +10,7 @@ namespace Sol.Galaxy.Data.Entities
     {
         public int CustomerId { get; set; }
         public string FullName { get; set; }
+
+        public List<Invoice> Invoices { get; set; }
     }
 }
