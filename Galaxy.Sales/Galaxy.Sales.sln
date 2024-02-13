@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Galaxy.Sales.Api", "Galaxy.Sales.Api\Galaxy.Sales.Api.csproj", "{833B2335-FCE8-4F79-B986-8C3D441E2EEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comunes", "Comunes\Comunes.csproj", "{E585B246-30F8-4B9C-8BC8-BF7AD17DC0AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comunes", "Comunes\Comunes.csproj", "{E585B246-30F8-4B9C-8BC8-BF7AD17DC0AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
