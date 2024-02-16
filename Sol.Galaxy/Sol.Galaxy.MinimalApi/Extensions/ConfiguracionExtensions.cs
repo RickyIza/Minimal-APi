@@ -1,4 +1,5 @@
-﻿using Sol.Galaxy.Application;
+﻿using Microsoft.AspNetCore.Authorization;
+using Sol.Galaxy.Application;
 using Sol.Galaxy.Data.Services;
 using Sol.Galaxy.Domain;
 using System.Runtime.CompilerServices;
@@ -25,17 +26,31 @@ namespace Sol.Galaxy.MinimalApi.Extensions
         {
             services.AddScoped<IArticuloApp, ArticuloApp>();
             services.AddScoped<IArticuloData, ArticuloData>();
+            services.AddScoped<ISeguridadApp , SeguridadApp>();
             return services;
         }
 
         public static WebApplication ConfigureMetodos(this WebApplication app)
         {
-            app.MapGet("/articulos", async(IArticuloApp articuloApp) =>
+
+            app.MapPost("/auth", (ISeguridadApp seguridadApp,UserAutenticaRequest request) =>
+            {
+                UserAutenticaResponse response = seguridadApp.Autentica(request);
+                if (response==null)
+                {
+                    return Results.BadRequest("No valido");
+                }
+                return Results.Ok(response);
+            
+            });
+
+            app.MapGet("/articulos", [Authorize] async(IArticuloApp articuloApp) =>
             {
                 return await articuloApp.GetArticulos();
             }).WithOpenApi();
+            
             //metods
-
+            
             app.MapGet("/articulos/{id}", async (IArticuloApp articuloApp, int id =0) =>
             {
                 Articulo a = await articuloApp.GetArticulo(id);
